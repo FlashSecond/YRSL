@@ -1,11 +1,9 @@
 from tkinter import *
-from tkinter.ttk import Treeview
 import DataFile
 import datetime
 import XiaDan
 import fileR
 import send
-import vipsearch
 import tkinter.messagebox
 
 root = Tk()
@@ -46,28 +44,6 @@ def Textcopy(FinText):
         root.clipboard_append(FinText)
     except TypeError:
         pass
-#显示列表的订单内容
-def Danupdate():
-    if ListDanShow.curselection() != "":
-        DuNum = ListDanShow.curselection()
-        LWShowDing.delete(0,END)
-        LWShowXia.delete(0,END)
-        LWShowPhone.delete(0,END)
-        LWShowAddre.delete(0,END)
-        LWShowGoods.delete(0,END)
-        LWShowMoney.delete(0,END)
-        LWShowSk.delete(0,END)
-        LWShowCao.delete(0,END)
-        
-        Bupdate = tuple(ListDanShow.get(DuNum).split('\t'))
-        LWShowDing.insert(0,Bupdate[0])
-        LWShowXia.insert(0,Bupdate[1])
-        LWShowPhone.insert(0,Bupdate[2])
-        LWShowAddre.insert(0,Bupdate[3])
-        LWShowGoods.insert(0,Bupdate[4])
-        LWShowMoney.insert(0,Bupdate[5])
-        LWShowSk.insert(0,Bupdate[6])
-        LWShowCao.insert(0,Bupdate[9])
 #刷新订单列表
 def ShowListTBtnEvent():
     DateNow = datetime.date.today() + datetime.timedelta(int(DanNowDateNum.get()))
@@ -89,15 +65,10 @@ def ShowListTBtnEvent():
         ExtraNum.insert(0,int(DanInfo[2][:-1]))
 #订单信息审核
 def CheckDanInf(ReText):
-    for it in ShowListDanShow.get_children():
-        ShowListDanShow.delete(it)
     if ReText[2]:
         ShowPhoneNum['text'] =  ReText[2]
-        vipinfo = vipsearch.dbsearch(ReText[2])
-        for i in vipinfo:
-            ShowListDanShow.insert('',"end",values = i)
     else:
-        ShowPhoneNum['text'] =  "客户手机有问题,请注意！"
+         tkinter.messagebox.showerror("温馨提示","客户手机有问题,请注意！")
     ShowGoods.delete(0,END)
     ShowMoney.delete(0,END)
      
@@ -158,36 +129,6 @@ def ListPlusBtnEvent():
             ShowNum.delete(0,END)
             ShowNum.insert(0,DanNum)
     Listoper(DateNow,DanNum)#函数
-#修改列表订单按钮
-def ListchangeBtnEvent():
-    if ListDanShow.curselection() != "":
-        DateNow = datetime.date.today() + datetime.timedelta(int(DanNowDateNum.get()))
-        DuNum = ListDanShow.curselection()
-        Bupdate = ListDanShow.get(DuNum).split('\t')
-        if LWShowDing.get() != Bupdate[0]:
-            Bupdate[0] = LWShowDing.get()
-        if LWShowXia.get() != Bupdate[1]:
-            Bupdate[1] = LWShowXia.get()
-        if LWShowPhone.get() != Bupdate[2]:
-            Bupdate[2] = LWShowPhone.get()
-        if LWShowAddre.get() != Bupdate[3]:
-            Bupdate[3] = LWShowAddre.get()
-        if LWShowGoods.get() != Bupdate[4]:
-            Bupdate[4] = LWShowGoods.get()
-        if LWShowMoney.get() != Bupdate[5]:
-            Bupdate[5] = LWShowMoney.get()
-        if LWShowSk.get() != Bupdate[6]:
-            Bupdate[6] = LWShowSk.get()
-        if LWShowCao.get() != Bupdate[9]:
-            Bupdate[9] = LWShowCao.get()
-        Aupdate = ("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s") % tuple(Bupdate)
-        Textcopy(T)
-        send.sendinfo()
-        ListDanShow.delete(DuNum)
-        ListDanShow.insert(DuNum,Aupdate)
-        #ListDanShow.yview(MOVETO,1.0)
-        Listxt = ListDanShow.get(0,END)
-        fileR.FileW(Listxt,DateNow)#函数
 
 #插入文本地址分隔
 def DinTextIn(event):
@@ -208,12 +149,6 @@ def RootO():
 def FootO():
     foot.withdraw()
     root.deiconify()
-#列表内容更改界面
-def ListChangeO():
-    ListWin.withdraw()
-    ListWin.deiconify()
-def Objectdel():
-    ListWin.withdraw()
 def footdel():
     root.destroy()
 #--------------------------------------菜单函数------------------------------------
@@ -268,7 +203,7 @@ if __name__ == '__main__':
     foot.withdraw()
     foot.protocol(name = "WM_DELETE_WINDOW",func = footdel)
     frame.pack()
-    #菜单框架
+#菜单框架--------------------------------------------------
     DanMenu = Menu(root)
     Teach = Menu(DanMenu,tearoff = False)
     Teach.add_command(label = "订单类型栏",command = Dantype)
@@ -281,7 +216,7 @@ if __name__ == '__main__':
     Teach.add_command(label = "订单内容显示列表",command = Danlit)
     DanMenu.add_cascade(label = "说明",menu = Teach)
     root.config(menu = DanMenu)
-    #订单类型框架---------------------------------------------
+#订单类型框架---------------------------------------------
     DanModeF = LabelFrame(root,text="订单类型栏",font = ("黑体","13"),padx=1,pady=1)
     DanModeF.pack()
         #生成订单类型选项
@@ -297,7 +232,7 @@ if __name__ == '__main__':
         DanRadio[0].deselect()
         DT.grid(row=1,column =DataFile.DanMode.index(D))
     DanRadio[0].deselect()
-    #下单人名称框架----------------------------------------------
+#下单人名称框架----------------------------------------------
     XiaPerF = LabelFrame(root,text="下单人选择栏",font = ("黑体","13"),padx=1,pady=1)
     XiaPerF.pack()
         #生成下单人选项
@@ -314,7 +249,7 @@ if __name__ == '__main__':
         OP.grid(row = RO + DataFile.XiaPer.index(O) // 9 ,\
                 column =(DataFile.XiaPer.index(O)  - 9 *(DataFile.XiaPer.index(O) // 9)))
     XiaRadio[0].deselect()
-    #订单状态显示栏框架------------------------------------------
+#订单状态显示栏框架------------------------------------------
     DanModeL = LabelFrame(root,text="订单状态栏",font = ("黑体","13"),padx=1,pady=1)
     DanModeL.pack()
         #显示选择订单类似
@@ -347,7 +282,7 @@ if __name__ == '__main__':
                            from_ = 0,to = 99,command = PlusDate)
     DanNowDateNum.grid(row=1,column =9)
 
-    #待处理订单内容框架---------------------------------------------
+#待处理订单内容框架---------------------------------------------
     DinTextF = LabelFrame(root,text="订单内容:",font = ("黑体","13"),padx=1,pady=1)
     DinTextF.pack()
         #水平滚动条
@@ -361,7 +296,7 @@ if __name__ == '__main__':
     DinText.pack(fill=BOTH)
         #输入框与水平滚动条关联
     DinScb.config(command=DinText.xview)
-    #订单补充内容栏---------------------------------------------
+#订单补充内容栏---------------------------------------------
     DinTextB = LabelFrame(root,text="订单补充内容:",font = ("黑体","13"),padx=1,pady=1)
     DinTextB.pack()
             #补充送货商品
@@ -374,7 +309,7 @@ if __name__ == '__main__':
     ShowMoneyL.grid(row=2,column =1)
     ShowMoney=Entry(DinTextB ,width = 10)
     ShowMoney.grid(row=2,column =2,sticky = W)
-    #订单内容处理按钮框架----------------------------------------------
+#订单内容处理按钮框架----------------------------------------------
     DinBTNF = LabelFrame(root,text = "订单处理按钮组",font = ("黑体","13"),padx = 1,pady =1)
     DinBTNF.pack()
         #订单处理按钮
@@ -389,36 +324,18 @@ if __name__ == '__main__':
         #列表内容删除按钮
     ListchangeBtn = Button(DinBTNF,text="删除列表订单",command = ListDelBtnEvent)
     ListchangeBtn.grid(row = 1,column = 4)
-        #列表内容修改按钮
-    ListDelBtn = Button(DinBTNF,text="呼出界面",command = ListChangeO)
-    ListDelBtn.grid(row = 1,column = 5)
     #收起按钮
     BackBtn = Button(DinBTNF,text = "收起界面",command = RootO)
-    BackBtn.grid(row = 1,column = 6)
-    #订单处理信息框架------------------------------------------------
+    BackBtn.grid(row = 1,column = 5)
+#订单处理信息框架------------------------------------------------
     DanModeC = LabelFrame(root,text="订单处理信息栏",font = ("黑体","13"),padx=1,pady=1)
     DanModeC.pack()
         #显示手机号码
     ShowPhoneL =Label(DanModeC ,width = 10,height = 2,text = "客户手机:")
     ShowPhoneL.grid(row=1,column =1)
-    ShowPhoneNum=Label(DanModeC ,width = 45,height = 1,text ="客户手机")
+    ShowPhoneNum=Label(DanModeC ,width = 45,height = 1,text ="")
     ShowPhoneNum.grid(row=1,column =2,columnspan = 5,sticky = W)
-        #列表
-    ShowListDanShow = Treeview(DanModeC,column = ('c1','c2','c3','c4','c5'),show="headings",height = 2)
-        #设置列宽
-    ShowListDanShow.column('c1',width = 100,anchor = 'center')
-    ShowListDanShow.column('c2',width = 100,anchor = 'center')
-    ShowListDanShow.column('c3',width = 180,anchor = 'center')
-    ShowListDanShow.column('c4',width = 80,anchor = 'center')
-    ShowListDanShow.column('c5',width = 80,anchor = 'center')
-        #标题文本
-    ShowListDanShow.heading('c1',text = "会员卡号")
-    ShowListDanShow.heading('c2',text = "会员名")
-    ShowListDanShow.heading('c3',text = "会员电话")
-    ShowListDanShow.heading('c4',text = "卡在店")
-    ShowListDanShow.heading('c5',text = "卡关联")
-    ShowListDanShow.grid(row=2,column =1,columnspan =6,sticky = W)
-    #列表订单内容显示框架---------------------------------------------------
+#列表订单内容显示框架---------------------------------------------------
     ListDanF = LabelFrame(root,text="订单内容显示:",font = ("黑体","13"),padx=1,pady=1)
     ListDanF.pack()
         #垂直滚动条
@@ -435,64 +352,4 @@ if __name__ == '__main__':
     ListScbV.config(command=ListDanShow.yview)
     ListScbH.config(command=ListDanShow.xview)
     
-    #订单内容更改窗口--------------------------------------------
-    ListWin = Toplevel(root)
-    ListWin.wm_attributes('-topmost',1)
-        #订单补充内容栏---------------------------------------------
-    LWDinTextB = LabelFrame(ListWin,text="订单补充内容:",font = ("黑体","13"),padx=1,pady=1)
-    LWDinTextB.pack()
-            #订单类型
-    LWShowDingL =Label(LWDinTextB ,width = 4,height = 2,text = "订单:")
-    LWShowDingL.grid(row=1,column =1,sticky = E)
-    LWShowDing=Entry(LWDinTextB ,width = 7)
-    LWShowDing.grid(row=1,column =2,sticky = W)
-            #下单人
-    LWShowXiaL =Label(LWDinTextB ,width = 7,height = 2,text = "操作人:")
-    LWShowXiaL.grid(row=1,column =3,sticky = W)
-    LWShowXia=Spinbox(LWDinTextB,values = tuple(DataFile.XiaPer) ,width = 4,wrap = True)
-    LWShowXia.delete(0,END)
-    LWShowXia.grid(row=1,column =4,sticky = W)
-            #客户电话
-    LWShowPhoneL =Label(LWDinTextB ,width = 7,height = 2,text = "客户电话:")
-    LWShowPhoneL.grid(row=1,column =5,sticky = W)
-    LWShowPhone=Entry(LWDinTextB ,width = 23)
-    LWShowPhone.grid(row=1,column =6,columnspan = 2,sticky = W)
-            #送货地址
-    LWShowAddressL =Label(LWDinTextB ,width = 7,height = 2,text = "送货地址:")
-    LWShowAddressL.grid(row=2,column =1,sticky = W)
-    LWShowAddre=Entry(LWDinTextB ,width = 69)
-    LWShowAddre.grid(row=2,column =2,columnspan = 7,sticky = W)
-            #补充送货商品
-    LWShowGoodsL =Label(LWDinTextB ,width = 7,height = 2,text = "补加商品:")
-    LWShowGoodsL.grid(row=3,column =1,sticky = W)
-    LWShowGoods=Entry(LWDinTextB ,width = 69)
-    LWShowGoods.grid(row=3,column =2,columnspan = 7,sticky = W)
-        #补充金额
-    LWShowMoneyL =Label(LWDinTextB ,width = 7,height = 2,text = "所需金额:")
-    LWShowMoneyL.grid(row=4,column =1)
-    LWShowMoney=Entry(LWDinTextB ,width = 10)
-    LWShowMoney.grid(row=4,column =2,columnspan = 2,sticky = W)
-        #收款方式
-    LWShowSkL =Label(LWDinTextB ,width = 7,height = 2,text = "收款方式:")
-    LWShowSkL.grid(row=4,column =4)
-    LWShowSk=Spinbox(LWDinTextB,values = tuple(DataFile.SKtype) ,width = 7,wrap = True)
-    LWShowSk.delete(0,END)
-    LWShowSk.grid(row=4,column =5,sticky = W)
-        #操作人
-    LWShowCaoL =Label(LWDinTextB ,width = 7,height = 2,text = "操作人:")
-    LWShowCaoL.grid(row=4,column =6,sticky = W)
-    LWShowCao=Spinbox(LWDinTextB,values = tuple(DataFile.XiaPer) ,width = 4,wrap = True)
-    LWShowCao.delete(0,END)
-    LWShowCao.grid(row=4,column =7,sticky = W)
-    #列表更改按钮栏
-    LWTBtn = LabelFrame(ListWin,text="订单内容修改按钮组:",font = ("黑体","13"),padx=1,pady=1)
-    LWTBtn.pack()
-        #显示列表订单状态
-    LWShowBtn = Button(LWTBtn,text="显示内容",command = Danupdate)
-    LWShowBtn .grid(row = 1,column = 1)
-        #修改列表订单状态
-    LWChangeBtn = Button(LWTBtn,text="确认更改",command = ListchangeBtnEvent)
-    LWChangeBtn .grid(row = 1,column = 2)
-    ListWin.withdraw()
-    ListWin.protocol(name = "WM_DELETE_WINDOW",func = Objectdel)
     mainloop()
