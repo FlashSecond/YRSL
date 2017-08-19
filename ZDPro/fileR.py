@@ -3,6 +3,10 @@ import os.path
 import time
 import datetime
 import pickle
+import send
+
+messDT = datetime.datetime.today()
+mess = messDT.strftime("%Y%m%d%H%M%S")
 nowpath = os.getcwd()
 os.chdir(os.pardir)
 prepath = os.getcwd()
@@ -11,7 +15,8 @@ def FileR(datime):
     DateT = datime.strftime("%Y%m%d")
     Datey = datime.strftime("%Y")
     Datem = datime.strftime("%m")
-    
+
+    send.pullfile()#函数
     Filepath = os.path.join(prepath ,Datey , Datem)
     Filetxt = os.path.join(Filepath , DateT)
     if not(os.path.exists(Filepath)):
@@ -37,6 +42,7 @@ def FileW(text,datime):
         f= open(Filetxt,'wb')
         pickle.dump(text,f)
         time.sleep(0.2)
+        send.push(mess)
     finally:
         f.close()
 def Redata(datime,Sdata,Edata,filename):
