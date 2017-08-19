@@ -11,6 +11,7 @@ nowpath = os.getcwd()
 os.chdir(os.pardir)
 prepath = os.getcwd()
 os.chdir(nowpath)
+text = ["","",""]
 def FileR(datime):
     DateT = datime.strftime("%Y%m%d")
     Datey = datime.strftime("%Y")
@@ -42,34 +43,39 @@ def FileW(text,datime):
         f= open(Filetxt,'wb')
         pickle.dump(text,f)
         time.sleep(0.2)
-        send.push(mess)
+        f.close()
+        send.pushfile(mess)#函数
     finally:
         f.close()
+        
 def Redata(datime,Sdata,Edata,filename):
     DateT = datime.strftime("%Y%m%d")
-    Filetxt = "sign\\" + filename + ".txt"
+    Filetxt = "sign\\" + filename
     try:
-        f= open(Filetxt ,'r')
-        DanF = f.readlines()
-        if DanF[0][:-1] == DateT and int(DanF[1][:-1]) > Sdata:
+        f= open(Filetxt ,'rb')
+        DanF = pickle.load(f)
+        if DanF[0] == DateT and int(DanF[1]) > Sdata:
             return DanF
             f.close()        
     except FileNotFoundError:
-        f= open(Filetxt,'a')
+        f= open(Filetxt,'ab')
         f.close()
-        f = open(Filetxt,'w')
-        f.writelines(DateT + '\n' + str(Sdata) + '\n' + str(Edata) + '\n')
-        f.flush()
-        f.close()
+        f = open(Filetxt,'wb')
+        text[0] = DateT
+        text[1] = str(Sdata)
+        text[2] = str(Edata)
+        pickle.dump(text,f)
     finally:
         f.close()
 def Wrdata(datime,Sdata,Edata,filename):
     DateT = datime.strftime("%Y%m%d")
-    Filetxt = "sign\\" + filename + ".txt"
+    Filetxt = "sign\\" + filename
     try:
-        f = open(Filetxt,'w')
-        f.writelines(DateT + '\n' + str(Sdata) + '\n' + str(Edata) + '\n')
-        f.flush()
+        f = open(Filetxt,'wb')
+        text[0] = DateT
+        text[1] = str(Sdata)
+        text[2] = str(Edata)
+        pickle.dump(text,f)
     finally:
         f.close()
     

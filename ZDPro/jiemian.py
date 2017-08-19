@@ -30,10 +30,10 @@ def Listoper(DateNow,DanNum):
     ShowNum.delete(0,END)
     ShowNum.insert(0,DanNum)
     Listxt = ListDanShow.get(0,END)
+    fileR.Wrdata(DateNow,int(ShowNum.get()),int(ExtraNum.get()),DanNowDateNum.get())#函数
     fileR.FileW(Listxt,DateNow)#函数
     DinText.delete(0,END)
     ListDanShow.yview(MOVETO,1.0)
-    fileR.Wrdata(DateNow,int(ShowNum.get()),int(ExtraNum.get()),DanNowDateNum.get())#函数
 #复制
 def Textcopy(FinText):
     try:
@@ -60,9 +60,9 @@ def ShowListTBtnEvent():
     DanInfo = fileR.Redata(DateNow,int(ShowNum.get()),int(ExtraNum.get()),DanNowDateNum.get())#函数
     if DanInfo:
         ShowNum.delete(0,END)
-        ShowNum.insert(0,int(DanInfo[1][:-1]))
+        ShowNum.insert(0,int(DanInfo[1]))
         ExtraNum.delete(0,END)
-        ExtraNum.insert(0,int(DanInfo[2][:-1]))
+        ExtraNum.insert(0,int(DanInfo[2]))
 #订单信息审核
 def CheckDanInf(ReText):
     if ReText[2]:
