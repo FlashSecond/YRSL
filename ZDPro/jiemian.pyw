@@ -95,9 +95,10 @@ def WorkBtnEvent():
                 Textcopy(FinText)
                 ListDanShow.insert(END,FinText)
                 DanNum = int(ShowNum.get())  + 1
+                send.sendinfo()
                 Listoper(DateNow,DanNum)#函数
                 DXdel()#函数
-                send.sendinfo()
+                
         else:
             tkinter.messagebox.showerror("温馨提示","请选择 订单类型  和  下单人")
     except:
@@ -120,6 +121,7 @@ def ListPlusBtnEvent():
     ShowListTBtnEvent() #函数
     DanNum = int(ShowNum.get())
     Textcopy(DinText.get()) #函数
+    send.sendinfo() #函数
     ListnTxt = DinText.get().split('\n')
     for T in ListnTxt:
         if 3 < T.count('\t'):
@@ -128,7 +130,7 @@ def ListPlusBtnEvent():
             ShowNum.delete(0,END)
             ShowNum.insert(0,DanNum)
     Listoper(DateNow,DanNum)#函数
-    send.sendinfo() #函数
+    
 
 #插入文本地址分隔
 def DinTextIn(event):
