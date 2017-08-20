@@ -68,7 +68,7 @@ def CheckDanInf(ReText):
     if ReText[2]:
         ShowPhoneNum['text'] =  ReText[2]
     else:
-         tkinter.messagebox.showerror("温馨提示","客户手机有问题,请注意！")
+         ShowPhoneNum['text'] =  "客户手机有问题,请注意！"
     ShowGoods.delete(0,END)
     ShowMoney.delete(0,END)
      
