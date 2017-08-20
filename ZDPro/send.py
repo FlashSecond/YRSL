@@ -10,7 +10,7 @@ def sendinfo():
 
 def pullfile():
     pull = "cd /d %s &\
-git pull https://github.com/FlashSecond/YRSL.git &" % (prepath)
+git pull origin master &" % (prepath)
     os.system(pull)
 def pushfile(mess):
     push = "cd /d %s &\
