@@ -8,7 +8,8 @@ git pull origin master &\
 git add -A &\
 git commit -m %s &\
 git push origin master &" % (bepath,mess)
+    print("上传中")
     subprocess.Popen(push,shell = True)
-    print("上传完成")
+    return "上传完成"
 if __name__== "__main__":
     pushfile("upload")
