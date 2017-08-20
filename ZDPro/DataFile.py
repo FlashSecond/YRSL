@@ -4,12 +4,12 @@ DanModeImg = ["DingD00.png","DingD01.png","DingD02.png","DingD03.png","DingD04.p
 DanModeID = ["D0","D1","D2","D3","D4","D5","D6"]
 #下单人数据
 XiaPer= ["YT","TOM","大叔","猪","英","英妹","一一","cvm","宝","莹姐","秋","二叔","Ray","二哥","福","商城","店",\
-         "霞姐","排骨","","浪","锋","王"]
+         "霞姐","排骨","浪","王"]
 XiaPerImg = ["XiaD00.png","XiaD01.png","XiaD02.png","XiaD03.png","XiaD04.png","XiaD05.png","XiaD06.png","XiaD07.png",\
              "XiaD08.png","XiaD09.png","XiaD10.png","XiaD11.png","XiaD12.png","XiaD13.png","XiaD14.png","XiaD15.png",\
-             "XiaD16.png","XiaD17.png","XiaD18.png","XiaD19.png","XiaD20.png","XiaD21.png","XiaD22.png"]
+             "XiaD16.png","XiaD17.png","XiaD18.png","XiaD19.png","XiaD20.png"]
 XiaPerID = ["X0","X1","X2","X3","X4","X5","X6","X7","X8","X9","X10","X11","X12","X13","X14","X15",\
-            "X16","X17","X18","X19","X20","X21","X22"]
+            "X16","X17","X18","X19","X20"]
 #特殊操作人数据
 CaoPer = {"YT":"YT","英":"莹姐"}
 SKtype = ["转账","收现","会员卡消费","已转账","POS","月结","商城转账","领用","退款"]

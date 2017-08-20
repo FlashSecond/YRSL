@@ -12,9 +12,9 @@ def pullfile():
     pull = "cd /d %s &\
 git pull origin master &" % (prepath)
     os.system(pull)
-def pushfile(mess):
+def pushfile(NOF,NOS,mess):
     push = "cd /d %s &\
-git add . &\
+git add %s %s &\
 git commit -m %s &\
-git push origin master &" % (prepath,mess)
+git push origin master &" % (prepath,NOF,NOS,mess)
     os.system(push)

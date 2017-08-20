@@ -44,7 +44,7 @@ def FileW(text,datime):
         f.close()
         messDT = datetime.datetime.today()
         mess = messDT.strftime("%Y%m%d%H%M%S")
-        send.pushfile(mess)#函数
+        send.pushfile(Filepath,nowpath + "\\sign" ,mess)#函数
     finally:
         f.close()
         

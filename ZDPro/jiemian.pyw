@@ -30,10 +30,10 @@ def Listoper(DateNow,DanNum):
     ShowNum.delete(0,END)
     ShowNum.insert(0,DanNum)
     Listxt = ListDanShow.get(0,END)
-    fileR.Wrdata(DateNow,int(ShowNum.get()),int(ExtraNum.get()),DanNowDateNum.get())#函数
-    fileR.FileW(Listxt,DateNow)#函数
     DinText.delete(0,END)
     ListDanShow.yview(MOVETO,1.0)
+    fileR.Wrdata(DateNow,int(ShowNum.get()),int(ExtraNum.get()),DanNowDateNum.get())#函数
+    fileR.FileW(Listxt,DateNow)#函数
 #复制
 def Textcopy(FinText):
     try:
@@ -93,11 +93,11 @@ def WorkBtnEvent():
                 CheckDanInf(ReText) #函数
                 FinText = ("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s") % ReText
                 Textcopy(FinText)
-                send.sendinfo()
                 ListDanShow.insert(END,FinText)
                 DanNum = int(ShowNum.get())  + 1
                 Listoper(DateNow,DanNum)#函数
                 DXdel()#函数
+                send.sendinfo()
         else:
             tkinter.messagebox.showerror("温馨提示","请选择 订单类型  和  下单人")
     except:
@@ -108,19 +108,18 @@ def ListDelBtnEvent():
     if "--" in DinText.get():
         ListDanShow.delete(ListDanShow.curselection())
         Listxt = ListDanShow.get(0,END)
-        fileR.FileW(Listxt,DateNow)#函数
         DinText.delete(0,END)
         DanNum = int(ShowNum.get())  - 1
         ShowNum.delete(0,END)
         ShowNum.insert(0,DanNum)
         fileR.Wrdata(DateNow,int(ShowNum.get()),int(ExtraNum.get()),DanNowDateNum.get())#函数
+        fileR.FileW(Listxt,DateNow)#函数
 #添加列表订单按钮
 def ListPlusBtnEvent():
     DateNow = datetime.date.today() + datetime.timedelta(int(DanNowDateNum.get()))
     ShowListTBtnEvent() #函数
     DanNum = int(ShowNum.get())
-    Textcopy(DinText.get())
-    send.sendinfo()
+    Textcopy(DinText.get()) #函数
     ListnTxt = DinText.get().split('\n')
     for T in ListnTxt:
         if 3 < T.count('\t'):
@@ -129,6 +128,7 @@ def ListPlusBtnEvent():
             ShowNum.delete(0,END)
             ShowNum.insert(0,DanNum)
     Listoper(DateNow,DanNum)#函数
+    send.sendinfo() #函数
 
 #插入文本地址分隔
 def DinTextIn(event):
