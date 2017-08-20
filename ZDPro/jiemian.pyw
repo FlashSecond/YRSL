@@ -190,7 +190,7 @@ def Danlit():
 if __name__ == '__main__':
     
     root.title("野人森林做单工具")
-    root.minsize(580,900)
+    root.minsize(580,800)
     #root.maxsize(580,900)
     root.geometry(newGeometry = '%sx%s+%s+%s' % (root.winfo_x(), root.winfo_y(),\
                                                     int(root.winfo_screenwidth()-650), 0))
@@ -348,7 +348,7 @@ if __name__ == '__main__':
     ListScbH.pack(side=BOTTOM,fill=X)
         #列表
     ListDanShow = Listbox(ListDanF,xscrollcommand = ListScbH.set,yscrollcommand = ListScbV.set,\
-                          height = 5,width=50,selectmode = EXTENDED,font=("雅黑","15"))
+                          height = 6,width=50,selectmode = EXTENDED,font=("雅黑","15"))
     ListDanShow.pack(padx=10,fill=BOTH)
         #列表与滚动条关联
     ListScbV.config(command=ListDanShow.yview)
