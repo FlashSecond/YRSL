@@ -3,6 +3,7 @@ import os.path
 bepath = os.getcwd()
 os.chdir(os.pardir)
 prepath = os.getcwd()
+os.chdir(bepath)
 def sendinfo():
     nowpath ='\"' + bepath + '\\' + "send.exe\""
     os.system(nowpath)
