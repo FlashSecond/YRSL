@@ -18,3 +18,6 @@ git add %s %s &\
 git commit -m %s &\
 git push origin master &" % (prepath,NOF,NOS,mess)
     subprocess.Popen(push,shell = True)
+if __name__ == '__main__':
+    pass
+
