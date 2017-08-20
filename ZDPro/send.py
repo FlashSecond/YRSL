@@ -1,9 +1,10 @@
 import os
 import os.path
+bepath = os.getcwd()
+os.chdir(os.pardir)
 prepath = os.getcwd()
-
 def sendinfo():
-    nowpath ='\"' + prepath + '\\' + "send.exe\""
+    nowpath ='\"' + bepath + '\\' + "send.exe\""
     os.system(nowpath)
 
 def pullfile():

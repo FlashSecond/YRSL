@@ -5,8 +5,6 @@ import datetime
 import pickle
 import send
 
-messDT = datetime.datetime.today()
-mess = messDT.strftime("%Y%m%d%H%M%S")
 nowpath = os.getcwd()
 os.chdir(os.pardir)
 prepath = os.getcwd()
@@ -44,6 +42,8 @@ def FileW(text,datime):
         pickle.dump(text,f)
         time.sleep(0.2)
         f.close()
+        messDT = datetime.datetime.today()
+        mess = messDT.strftime("%Y%m%d%H%M%S")
         send.pushfile(mess)#函数
     finally:
         f.close()
