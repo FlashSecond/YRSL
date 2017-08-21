@@ -10,7 +10,7 @@ def startload():
     secpath ='\"' + bepath + '\\' + "jiemian.pyw\""
     fir = subprocess.call(firpath,shell = True)
     print(fir)
-    if fir:
+    if fir==0:
         print(fir)
         subprocess.Popen(secpath,shell = True)
 
