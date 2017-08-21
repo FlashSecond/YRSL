@@ -8,11 +8,9 @@ os.chdir(bepath)
 def startload():
     firpath ='\"' + prepath + '\\' + "upload.py\""
     secpath ='\"' + bepath + '\\' + "jiemian.pyw\""
-    fir = subprocess.call(firpath,shell = True)
-    print(fir)
-    if fir==0:
-        print(fir)
-        subprocess.Popen(secpath,shell = True)
+    subprocess.call(firpath,shell = True)
+    time.sleep(10)
+    subprocess.Popen(secpath,shell = True)
 
 if __name__ == '__main__':
     startload()
