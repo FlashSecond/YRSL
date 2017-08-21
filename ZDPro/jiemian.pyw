@@ -1,5 +1,6 @@
 from tkinter import *
 import DataFile
+import time
 import datetime
 import XiaDan
 import fileR
@@ -48,6 +49,8 @@ def Textcopy(FinText):
 def ShowListTBtnEvent():
     DateNow = datetime.date.today() + datetime.timedelta(int(DanNowDateNum.get()))
     ListR = fileR.FileR(DateNow)#函数
+    send.pullfile()#函数
+    time.sleep(2)
     if int(ListDanShow.size()) != int(len(ListR)):
         DXdel()#函数
         DanNum = len(ListR) + int(ExtraNum.get()) + 1
@@ -98,6 +101,9 @@ def WorkBtnEvent():
                 send.sendinfo()
                 Listoper(DateNow,DanNum)#函数
                 DXdel()#函数
+                messDT = datetime.datetime.today()
+                mess = messDT.strftime("%Y%m%d%H%M%S")
+                send.pushfile(Filepath,nowpath + "\\sign" ,mess)#函数
                 
         else:
             tkinter.messagebox.showerror("温馨提示","请选择 订单类型  和  下单人")
