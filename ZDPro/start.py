@@ -7,10 +7,13 @@ prepath = os.getcwd()
 os.chdir(bepath)
 def startload():
     firpath ='\"' + prepath + '\\' + "upload.py\""
-    secpath ='\"' + bepath + '\\' + "jiemian.pyw\""
+    
     subprocess.Popen(firpath,shell = True)
-    #time.sleep(16)
-    #subprocess.Popen(secpath,shell = True)
+def startup():
+    secpath ='\"' + bepath + '\\' + "jiemian.pyw\""
+    subprocess.Popen(secpath,shell = True)
 
 if __name__ == '__main__':
     startload()
+    time.sleep(16)
+    startup()
