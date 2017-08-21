@@ -9,7 +9,9 @@ def startload():
     firpath ='\"' + prepath + '\\' + "upload.py\""
     secpath ='\"' + bepath + '\\' + "jiemian.pyw\""
     fir = subprocess.call(firpath,shell = True)
+    print(fir)
     if fir:
+        print(fir)
         subprocess.Popen(secpath,shell = True)
 
 if __name__ == '__main__':
