@@ -7,7 +7,7 @@ prepath = os.getcwd()
 os.chdir(bepath)
 def startload():
     nowpath ='\"' + prepath + '\\' + "upload.py\""
-    subprocess.Popen(nowpath,shell = True)
+    subprocess.call(nowpath,shell = True)
 
 def startup():
     nowpath ='\"' + bepath + '\\' + "jiemian.pyw\""
