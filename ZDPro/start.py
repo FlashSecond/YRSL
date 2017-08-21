@@ -15,6 +15,6 @@ def startup():
 
 if __name__ == '__main__':
     startload()
-    time.sleep(3)
+    time.sleep(5)
     startup()
 
