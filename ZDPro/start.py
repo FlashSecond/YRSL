@@ -13,7 +13,7 @@ def startload():
     a.wait()
     secpath ='\"' + bepath + '\\' + "jiemian.pyw\""
     subprocess.check_call(secpath,shell = True)
-
+    a.terminate()
 if __name__ == '__main__':
     startload()
 
