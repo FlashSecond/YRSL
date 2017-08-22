@@ -3,6 +3,7 @@ import os.path
 import time
 import datetime
 import pickle
+import send
 
 nowpath = os.getcwd()
 os.chdir(os.pardir)
@@ -10,6 +11,7 @@ prepath = os.getcwd()
 os.chdir(nowpath)
 text = ["","",""]
 def FileR(datime):
+    time.sleep(1)
     DateT = datime.strftime("%Y%m%d")
     Datey = datime.strftime("%Y")
     Datem = datime.strftime("%m")
@@ -39,7 +41,9 @@ def FileW(text,datime):
         pickle.dump(text,f)
         time.sleep(0.2)
         f.close()
-        
+        messDT = datetime.datetime.today()
+        mess = messDT.strftime("%Y%m%d%H%M%S")
+        send.pushfile(Filepath,prepath + "\\sign" ,mess)#函数
     finally:
         f.close()
         
