@@ -10,7 +10,6 @@ def startload():
 #git pull origin master & exit" % (prepath)
     firpath = '\"' + prepath + '\\' + "upload.py\""
     os.system(firpath)
-    print(a.poll())
     secpath ='\"' + bepath + '\\' + "jiemian.pyw\""
     subprocess.Popen(secpath,shell = True)
         
