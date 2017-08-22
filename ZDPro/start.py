@@ -6,12 +6,12 @@ os.chdir(os.pardir)
 prepath = os.getcwd()
 os.chdir(bepath)
 def startload():
-#    firpath ="cd /d %s &\
+   # firpath ="cd /d %s &\
 #git pull origin master &" % (prepath)
-    firpath = '\"' + prepath + '\\' + "upload.pyw\""
-    subprocess.Popen(firpath,shell = True)
+    firpath ='\"' + prepath + '\\' + "upload.py\""
+    subprocess.check_call(firpath,shell = True)
     secpath ='\"' + bepath + '\\' + "jiemian.pyw\""
-    subprocess.check_call(secpath,shell = True)
+    subprocess.call(secpath,shell = True)
 if __name__ == '__main__':
     startload()
 
