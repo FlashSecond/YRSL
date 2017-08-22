@@ -104,7 +104,7 @@ def WorkBtnEvent():
             else:
                 tkinter.messagebox.showerror("温馨提示","请选择 订单类型  和  下单人")
     except:
-            #tkinter.messagebox.showerror("温馨提示","请选择 订单类型  和  下单人")
+            tkinter.messagebox.showerror("温馨提示","请选择 订单类型  和  下单人")
 #删除列表文本按钮
 def ListDelBtnEvent():
     DateNow = datetime.date.today() + datetime.timedelta(int(DanNowDateNum.get()))
