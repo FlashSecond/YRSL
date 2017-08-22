@@ -8,12 +8,10 @@ os.chdir(bepath)
 def startload():
 #    firpath ="cd /d %s &\
 #git pull origin master &" % (prepath)
-    firpath = '\"' + prepath + '\\' + "upload.py\""
-    a = subprocess.Popen(firpath,shell = True)
-    a.wait()
+    firpath = '\"' + prepath + '\\' + "upload.pyw\""
+    subprocess.Popen(firpath,shell = True)
     secpath ='\"' + bepath + '\\' + "jiemian.pyw\""
     subprocess.check_call(secpath,shell = True)
-    a.terminate()
 if __name__ == '__main__':
     startload()
 
