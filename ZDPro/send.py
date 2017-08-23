@@ -11,13 +11,14 @@ def sendinfo():
 def pullfile():
     pull = "cd /d %s &\
 git pull origin master &" % (prepath)
-    subprocess.Popen(pull,shell = True)
+    a = subprocess.Popen(pull,shell = True)
+    a.wait()
 def pushfile(NOF,NOS,mess):
     push = "cd /d %s &\
 git add %s %s &\
 git commit -m %s &\
 git push origin master &" % (prepath,NOF,NOS,mess)
-    subprocess.Popen(push,shell = True)
+    a = subprocess.Popen(push,shell = True)
 if __name__ == '__main__':
     pass
 

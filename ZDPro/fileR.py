@@ -3,6 +3,7 @@ import os.path
 import time
 import datetime
 import pickle
+import send
 
 nowpath = os.getcwd()
 os.chdir(os.pardir)
@@ -37,15 +38,16 @@ def FileW(text,datime):
     try:
         f= open(Filetxt,'wb')
         pickle.dump(text,f)
-        time.sleep(0.2)
         f.close()
-        
     finally:
         f.close()
+        messDT = datetime.datetime.today()
+        mess = messDT.strftime("%Y%m%d%H%M%S")
+        send.pushfile(Filepath,prepath + "\\sign" ,mess)#函数
         
 def Redata(datime,Sdata,Edata,filename):
     DateT = datime.strftime("%Y%m%d")
-    Filetxt = "sign\\" + filename
+    Filetxt = prepath + "\\sign\\" + filename
     try:
         f= open(Filetxt ,'rb')
         DanF = pickle.load(f)
@@ -64,7 +66,7 @@ def Redata(datime,Sdata,Edata,filename):
         f.close()
 def Wrdata(datime,Sdata,Edata,filename):
     DateT = datime.strftime("%Y%m%d")
-    Filetxt = "sign\\" + filename
+    Filetxt = prepath + "\\sign\\" + filename
     try:
         f = open(Filetxt,'wb')
         text[0] = DateT
