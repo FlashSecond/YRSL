@@ -14,8 +14,6 @@ def FileR(datime):
     DateT = datime.strftime("%Y%m%d")
     Datey = datime.strftime("%Y")
     Datem = datime.strftime("%m")
-
-    send.pullfile()#函数
     Filepath = os.path.join(prepath ,Datey , Datem)
     Filetxt = os.path.join(Filepath , DateT)
     if not(os.path.exists(Filepath)):
@@ -40,13 +38,12 @@ def FileW(text,datime):
     try:
         f= open(Filetxt,'wb')
         pickle.dump(text,f)
-        time.sleep(0.2)
+        f.close()
+    finally:
         f.close()
         messDT = datetime.datetime.today()
         mess = messDT.strftime("%Y%m%d%H%M%S")
-        send.pushfile(Filepath,nowpath + "\\sign" ,mess)#函数
-    finally:
-        f.close()
+        send.pushfile(Filepath,prepath + "\\sign" ,mess)#函数
         
 def Redata(datime,Sdata,Edata,filename):
     DateT = datime.strftime("%Y%m%d")
