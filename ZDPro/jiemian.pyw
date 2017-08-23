@@ -192,7 +192,7 @@ def Danlit():
 if __name__ == '__main__':
     
     root.title("野人森林做单工具")
-    root.minsize(580,800)
+    root.minsize(580,850)
     #root.maxsize(580,900)
     root.geometry(newGeometry = '%sx%s+%s+%s' % (root.winfo_x(), root.winfo_y(),\
                                                     int(root.winfo_screenwidth()-650), 0))
