@@ -12,7 +12,8 @@ def startload(mess):
 git pull origin master &\
 git add -A &\
 git commit -m %s &\
-git push origin master &" % (bepath,mess)
+git push origin master & \
+exit" % (bepath,mess)
     a=subprocess.Popen(firpath,shell = True)
     a.wait()
 
