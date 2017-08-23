@@ -13,7 +13,7 @@ git pull origin master &\
 git add -A &\
 git commit -m %s &\
 git push origin master & \
-exit /B" % (bepath,mess)
+exit /B" % (prepath,mess)
     a=subprocess.Popen(firpath,shell = True)
     a.wait()
 
