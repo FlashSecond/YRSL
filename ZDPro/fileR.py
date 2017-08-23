@@ -11,7 +11,6 @@ prepath = os.getcwd()
 os.chdir(nowpath)
 text = ["","",""]
 def FileR(datime):
-    time.sleep(1)
     DateT = datime.strftime("%Y%m%d")
     Datey = datime.strftime("%Y")
     Datem = datime.strftime("%m")
@@ -39,13 +38,12 @@ def FileW(text,datime):
     try:
         f= open(Filetxt,'wb')
         pickle.dump(text,f)
-        time.sleep(0.2)
+        f.close()
+    finally:
         f.close()
         messDT = datetime.datetime.today()
         mess = messDT.strftime("%Y%m%d%H%M%S")
         send.pushfile(Filepath,prepath + "\\sign" ,mess)#函数
-    finally:
-        f.close()
         
 def Redata(datime,Sdata,Edata,filename):
     DateT = datime.strftime("%Y%m%d")
