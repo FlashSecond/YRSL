@@ -47,7 +47,7 @@ def FileW(text,datime):
         
 def Redata(datime,Sdata,Edata,filename):
     DateT = datime.strftime("%Y%m%d")
-    Filetxt = "sign\\" + filename
+    Filetxt = prepath + "\\sign\\" + filename
     try:
         f= open(Filetxt ,'rb')
         DanF = pickle.load(f)
@@ -66,7 +66,7 @@ def Redata(datime,Sdata,Edata,filename):
         f.close()
 def Wrdata(datime,Sdata,Edata,filename):
     DateT = datime.strftime("%Y%m%d")
-    Filetxt = "sign\\" + filename
+    Filetxt = prepath + "\\sign\\" + filename
     try:
         f = open(Filetxt,'wb')
         text[0] = DateT
