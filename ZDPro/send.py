@@ -19,7 +19,6 @@ git add %s %s &\
 git commit -m %s &\
 git push origin master &" % (prepath,NOF,NOS,mess)
     a = subprocess.Popen(push,shell = True)
-    a.wait()
 if __name__ == '__main__':
     pass
 
